@@ -2,3 +2,4 @@ pandas
 pytube
 streamlit
 numpy
+streamlit-player
