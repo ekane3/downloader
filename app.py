@@ -58,8 +58,8 @@ def download_video():
         video = video_stream.download()
         st.download_button(label="Download2 ",data=video)
         if st.button('Say hello'):
-            ideo_obj.streams.filter(file_extension='mp4', res="720p").first().download()
-
+            nam = ideo_obj.streams.filter(file_extension='mp4', res="720p").first().download(DOWNLOAD_FOLDER)
+            st.write(nam)
 # Title bar function
 def title_bar():
     project_title = st.sidebar.text_input("You can change the title of this project by input")
