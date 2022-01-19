@@ -22,37 +22,43 @@ def get_date_time():
 def description_app():
     st.title("Stream Media downer 📈")
     st.markdown("Télécharger des vidéos sur YouTube")
-    st.code("Entrer juste le lien de la vidéo et cliquer sur le bouton 🔍 pour commencer le téléchargement")
+    st.code("Just enter the link of the video and click on the button 📥 to start the download")
 
 # Download function
 def download_video():
     video = " "
     DOWNLOAD_FOLDER = "./downloads"
     st.markdown(' ')
-    st.markdown("### Download video 📥")
+    st.markdown("## Demo ")
     st.markdown(' ')
     st.markdown(' ')
     col1,col2 = st.columns(2)
     
     with col1:
         url = st.text_input("Enter the url of the video","https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        st.markdown("**Title** : " + " " + YouTube(url).title)
         st_player(url) 
         
         #st.download_button(label="Download ",data=video)
-        if st.button("Download video"):
+        if st.button("Download video 📥"):
             try:
                 video_obj = YouTube(url)
                 video_stream = video_obj.streams.get_highest_resolution()
-                video_stream.download(DOWNLOAD_FOLDER)
+                video_stream.download()
+                st.success("Video downloaded")
             except:
                 st.error("Error")
 
     with col2:
         url2 = st.text_input("Enter the url of the video ","https://youtu.be/CmSKVW1v0xM")
+        st.markdown("**Title** : " + " " + YouTube(url2).title)
         st_player(url2) 
+        ideo_obj = YouTube(url2)
+        video_stream = ideo_obj.streams.get_highest_resolution()
+        video = video_stream.download()
         st.download_button(label="Download2 ",data=video)
         if st.button('Say hello'):
-            st.write('Why hello there')
+            ideo_obj.streams.filter(file_extension='mp4', res="720p").first().download()
 
 # Title bar function
 def title_bar():

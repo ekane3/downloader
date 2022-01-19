@@ -3,3 +3,4 @@ pytube
 streamlit
 numpy
 streamlit-player
+pathlib
