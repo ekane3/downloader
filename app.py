@@ -1,8 +1,15 @@
+from datetime import date, datetime
 from pytube import YouTube
 import streamlit as st
 from streamlit_player import st_player
 
 
+# Date and Time of the day function 
+def get_date_time():
+    today = datetime.now()
+    st.markdown("### Date and Time 📆")
+    st.markdown(today.strftime("%A, %d %B %Y, %H:%M:%S"))
+    
 # Description function
 def description_app():
     st.title("Stream Media downer 📈")
@@ -16,15 +23,9 @@ def download_video():
     video = " "
     st.markdown(' ')
     st.markdown("### Download video 📥")
-    url = st.text_input("Enter the url of the video")
-    st_player("https://youtu.be/CmSKVW1v0xM")
-    if url:
-        try:
-            yt = YouTube(url)
-            video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download()
-            st.success("Video downloaded")
-        except:
-            st.error("Error")
+    url = st.text_input("Enter the url of the video","https://youtu.be/CmSKVW1v0xM")
+    st_player(url)
+    
     st.download_button(label="Download ",data=video)
 # Title bar function
 def title_bar():
@@ -55,6 +56,7 @@ def main():
 
     description_app()
     download_video()
+    get_date_time()
 
 if __name__ == "__main__":
     main()
